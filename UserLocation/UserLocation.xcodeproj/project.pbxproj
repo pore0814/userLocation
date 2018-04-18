@@ -16,7 +16,7 @@
 		D19A5C80207FA6A600FAF986 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D19A5C7F207FA6A600FAF986 /* GoogleService-Info.plist */; };
 		D1BE47E62083710F008EE76F /* FriendLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1BE47E52083710F008EE76F /* FriendLocation.swift */; };
 		D1C1DD83208061C1000A43BF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1DD82208061C1000A43BF /* LoginViewController.swift */; };
-		D1C1DD8620806573000A43BF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1DD8520806573000A43BF /* Location.swift */; };
+		D1C1DD8620806573000A43BF /* Struct.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C1DD8520806573000A43BF /* Struct.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		D19A5C7F207FA6A600FAF986 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D1BE47E52083710F008EE76F /* FriendLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendLocation.swift; sourceTree = "<group>"; };
 		D1C1DD82208061C1000A43BF /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		D1C1DD8520806573000A43BF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		D1C1DD8520806573000A43BF /* Struct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Struct.swift; sourceTree = "<group>"; };
 		DED14CCC64CEAC3BED8727F2 /* Pods-UserLocation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UserLocation.release.xcconfig"; path = "Pods/Target Support Files/Pods-UserLocation/Pods-UserLocation.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -77,7 +77,7 @@
 				3F1151A71FD8643600FBDA49 /* Info.plist */,
 				D19A5C7F207FA6A600FAF986 /* GoogleService-Info.plist */,
 				D1C1DD82208061C1000A43BF /* LoginViewController.swift */,
-				D1C1DD8520806573000A43BF /* Location.swift */,
+				D1C1DD8520806573000A43BF /* Struct.swift */,
 				D1BE47E52083710F008EE76F /* FriendLocation.swift */,
 			);
 			path = UserLocation;
@@ -230,7 +230,7 @@
 			files = (
 				D1C1DD83208061C1000A43BF /* LoginViewController.swift in Sources */,
 				3F11519E1FD8643600FBDA49 /* ViewController.swift in Sources */,
-				D1C1DD8620806573000A43BF /* Location.swift in Sources */,
+				D1C1DD8620806573000A43BF /* Struct.swift in Sources */,
 				D1BE47E62083710F008EE76F /* FriendLocation.swift in Sources */,
 				3F11519C1FD8643600FBDA49 /* AppDelegate.swift in Sources */,
 			);

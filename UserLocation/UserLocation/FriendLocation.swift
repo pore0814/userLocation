@@ -10,41 +10,30 @@ import Foundation
 import FirebaseDatabase
 
 class FriendLocation {
-    static var locationArray = [Location]()
-    static var travelArray = [Travel]()
+//    static var locationArray = [Location]()
+//    static var travel: Travel?
     
-    static func friendLocation(uid: String , data: @escaping ([Travel]) ->() ){
-        
-        Database.database().reference().child("location").child(uid).observe(.value, with: { (snapshot) in
-         //   print(snapshot.value)
+    static func friendLocation(uid: String , data: @escaping (Travel) ->() ){
+         var location: Location?
+           var travel: Travel?
+        Database.database().reference().child("location").child(uid).observe(.childAdded, with: { (snapshot) in
+        print("------snapshot.vale------")
+            print(uid)
+            print(snapshot.value)
+            if let locationContent = snapshot.value as? [String: Double]{
+                let lat = locationContent["latitude"] as! Double
+                let lng = locationContent["longitude"] as! Double
+                location = Location(lat: lat, long: lng)
             
-            //  拿單一筆資料
-            if  let locationDict = snapshot.value as? [String: Any] {
-             //print("locationDict",locationDict)
-                for location in locationDict {
-            
-                    let location = location.value as! [String:Double]
-                    let lat  = location["latitude"] as! Double
-                    let lng  = location["longitude"] as! Double
-                    let locationInstance = Location(lat:lat ,long: lng)
-                    
-                   //locationA
-                    self.locationArray.append(locationInstance)
-                }
             }
-            let travel = Travel(uid: uid, userName: "pore0814", location: self.locationArray)
-            //print("travel",travel)
-            self.travelArray.append(travel)
-           print("travelArray",self.travelArray)
-            //print("count",self.travelArray.count)
-
-            data(self.travelArray)
+            
+             travel = Travel(uid: uid, userName: "Annie", location: location!)
+            data(travel!)
       })
-        for i in travelArray {
-            print("i",i.uid)
-        }
-        
+     
+    
     }
+    
 }
 
 

@@ -19,7 +19,7 @@ struct Location{
 struct Travel {
     var uid : String
     var userName: String
-    var location = [Location]()
+    var location : Location
 }
 
 struct FinalSpot {
@@ -38,4 +38,18 @@ class ShowSpots : NSObject, MKAnnotation {
         self.subtitle = subtitle
         self.coordinate = coordinate
     }
+}
+
+struct Friend {
+    var annation: MKAnnotation
+    let id : String
+    let name : String
+}
+
+struct UserInfo {
+    
+    var uid: String
+    var name: String
+    var image: String
+    
 }
