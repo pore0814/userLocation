@@ -20,16 +20,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     lazy var ref: DatabaseReference = Database.database().reference()
     var postRef: DatabaseReference!
     
-      var  point = MKPointAnnotation()
-    var pointArray = [MKPointAnnotation]()
     
 
     let locationManager = CLLocationManager()
     var currentCorrdinate : CLLocationCoordinate2D!
     var allFriendInfo = [UserInfo(uid: "8yrC5blg1gUmZjOzf9wyzcZ2GV03", name: "pore0814", image: ""),UserInfo(uid: "IEWbcPgBVmR9QYDpjUQjaGLDsqB3", name: "pore", image: "")]
 
-   var showSpotsArray = [ShowSpots]()
-   var finalSpotsArray = [FinalSpot]()
+  
    var friendSpotsArray = [Friend]()
     
     override func viewDidLoad() {
@@ -57,82 +54,62 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
    
     func getdata(){
-        var showspots: ShowSpots?
-        
-        
       
+        
         for index in allFriendInfo{
-    
-          print(index)
+
             FriendLocation.friendLocation(uid: index.uid) { (results:Travel) in
-                print("---------------FriendLocation.friendLocation-----------")
-                print("results",results)
-                
-                //------------function--------
-                func firstMarker(){
-                    //取得使用者最後一筆經緯度
-                    let coordinate = CLLocationCoordinate2D(latitude: results.location.lat!, longitude: results.location.long!)
-                    
-                    //轉成Marker
-                    let showspots = ShowSpots(title: results.uid, subtitle: String(results.location.lat!), coordinate: coordinate)
-                    //實做Friend
-                    var myfriend = Friend(annation: showspots, id:index.uid, name: index.name)
-                    //加到friendArray裡
-                    self.friendSpotsArray.append(myfriend)
-                    print("------self.friendSpotsArray.last?.annation,false)!------")
-                    
-                    //顯示在map上
-                    self.mapView.addAnnotation(myfriend.annation)
-                    
-                }
-                
-                print("------------frinedarray----------")
-                print(self.friendSpotsArray.count)
-                
-                
-        //__________開始判斷-----------//地圖上重覆的marker抓出來-> //顯示在地圖上
+       
+                 //__________開始判斷-----------//地圖上重覆的marker抓出來-> //顯示在地圖上
                 if self.friendSpotsArray.count <= 0 {
-                    firstMarker()
-                } else {
-                    for i in 0...self.friendSpotsArray.count  - 1{
+                    self.firstMarker(results: results, userid: index.uid , username: index.name)
+                }
+                else
+                    {
+                    for i in 0...self.friendSpotsArray.count  - 1 {
                         if results.uid == self.friendSpotsArray[i].id{
                             //remove annotation
                             self.mapView.removeAnnotation(self.friendSpotsArray[i].annation)
                             //remove Array
                             self.friendSpotsArray.remove(at: i)
-                            
                             //取得使用者最後一筆經緯度
                             let coordinate = CLLocationCoordinate2D(latitude: results.location.lat!, longitude: results.location.long!)
-                            
                             //轉成Marker
                             let showspots = ShowSpots(title: results.uid, subtitle: String(results.location.lat!), coordinate: coordinate)
-                            
                             var myfriend = Friend(annation: showspots, id:index.uid, name: index.name)
-                            print("------self.friendSpotsArray.last?.annation,true)!------")
                             //顯示到map上
                             self.mapView.addAnnotation(myfriend.annation)
                             //新增到Array裡
                             self.friendSpotsArray.append(myfriend)
-                            print(self.friendSpotsArray.count)
-                            
                             return
                         }
                     }
-                     firstMarker()
+                    self.firstMarker(results:results,userid: index.uid,username: index.name )
                 }
             }
         }
-        
     }
 
-
-   
-
-        
     
+    func firstMarker(results:Travel, userid: String , username: String){
+        //取得使用者最後一筆經緯度
+        let coordinate = CLLocationCoordinate2D(latitude: results.location.lat!, longitude: results.location.long!)
+        //轉成Marker
+        let showspots = ShowSpots(title: results.uid, subtitle: String(results.location.lat!), coordinate: coordinate)
+        //生成Friend物件
+        var myfriend = Friend(annation: showspots, id:userid, name: username)
+        //加到friendArray裡
+        self.friendSpotsArray.append(myfriend)
+        //顯示在map上
+        self.mapView.addAnnotation(myfriend.annation)
         
-
+    }
     
+    
+    
+    
+    
+
     /*
     func getDirctions(to destination: MKPlacemark) {
         let sourcePlacemark = MKPlacemark(coordinate: currentCorrdinate)
@@ -185,9 +162,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
 
 /*
-         
-        
-         
         print("user latitude = \(currentLocation.coordinate.latitude)")
         print("user longitude = \(currentLocation.coordinate.longitude)")
  */
@@ -198,40 +172,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         //25.042231, 121.564855 正旅館
         //25.043500, 121.567451 全聯
  //postLocation(lat:25.042468, long:564160)//
-        
-//       let location = locations[0]
-//   //  guard let location = locations.first else { return }
-//        print(location)
-//
-//
-//        let center = CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
-//        let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: 0.01, longitudeDelta: 0.01))
-//          print("user latitude = \(location.coordinate.latitude)")
-//               print("user longitude = \(location.coordinate.longitude)")
-//        self.mapView.setRegion(region, animated: true)
-//
-
-      
-
-       
-
-        
-//        let location = locations[0]
-//
-//        let center = location.coordinate
-//        let span = MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
-//        let region = MKCoordinateRegion(center: center, span: span)
-//
-//        mapView.setRegion(region, animated: true)
-//        mapView.showsUserLocation = true
-//
+   
 //        //https://stackoverflow.com/questions/25296691/get-users-current-location-coordinates
-//        let userLocation :CLLocation = locations[0] as CLLocation
-//
-//        lat = userLocation.coordinate.latitude as? Double
-//        print("user latitude = \(userLocation.coordinate.latitude)")
-//        print("user longitude = \(userLocation.coordinate.longitude)")
-    
     }
 }
 
